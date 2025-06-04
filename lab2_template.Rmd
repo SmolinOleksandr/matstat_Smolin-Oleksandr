@@ -1,0 +1,69 @@
+---
+title: "Лабораторна робота №2"
+author: "Студент групи КІ-24-1 Смолін О.О"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Постановка задачі
+
+Побудувати графік функції:  
+$$
+y(x) = b_0 + b_1 x + b_2 x^2 \quad \text{для} \quad x \in [-1; 1]
+$$
+
+## Розв'язання
+
+### Параметри функції
+
+```{r}
+b0 <- 2
+b1 <- 3
+b2 <- 1.57
+x <- seq(-1, 1, by = 0.1)
+y <- b0 + b1 * x + b2 * x^2
+```
+
+### Побудова графіка
+
+```{r}
+plot(x, y, type = "l", col = "red", main = "Графік функції", xlab = "x", ylab = "y")
+points(x, y, col = "blue")
+```
+
+### Таблиця значень
+
+```{r}
+df <- data.frame(x = x, y = y)
+knitr::kable(head(df), caption = "Фрагмент таблиці значень функції")
+```
+
+### Експорт та імпорт таблиці
+
+```{r}
+library(rio)
+export(df, "data/data.csv")
+
+df_import <- import("data/data.csv")
+knitr::kable(head(df_import), caption = "Імпортована таблиця")
+```
+
+## Висновки
+
+- У середовищі RStudio створено динамічний документ у стилі literate programming.
+- Побудовано графік квадратичної функції.
+- Демонстровано експорт та імпорт даних у форматі CSV.
+
+## Список літератури
+
+```{r, results='asis'}
+cat("
+1. Wickham H. ggplot2: Elegant Graphics for Data Analysis. Springer-Verlag, 2016.  
+2. Xie Y. Dynamic Documents with R and knitr. CRC Press, 2015.  
+3. https://bookdown.org/yihui/rmarkdown/  
+")
+```
