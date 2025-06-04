@@ -1,0 +1,65 @@
+
+---
+title: "Лабораторна робота №3"
+author: "Смолін О.O"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Постановка задачі
+
+Випадкова величина $X \sim N(0, 1)$. Згенерувати вибірки обсягів $n = 100$ та $n = 1000$, оцінити параметри та побудувати графіки.
+
+## Генерація вибірок
+
+```{r}
+set.seed(123)
+n1 <- 100
+n2 <- 1000
+a <- 0
+s <- 1
+
+x1 <- rnorm(n1, a, s)
+x2 <- rnorm(n2, a, s)
+```
+
+## Статистичні характеристики
+
+```{r}
+summary(x1)
+summary(x2)
+
+mean(x1); var(x1); sd(x1)
+mean(x2); var(x2); sd(x2)
+```
+
+## Гістограми та щільність
+
+```{r}
+par(mfrow = c(1, 2))
+hist(x1, freq = FALSE, main = "Гістограма n=100", col = "lightblue")
+curve(dnorm(x, mean(x1), sd(x1)), add = TRUE, col = "red", lwd = 2)
+
+hist(x2, freq = FALSE, main = "Гістограма n=1000", col = "lightgreen")
+curve(dnorm(x, mean(x2), sd(x2)), add = TRUE, col = "blue", lwd = 2)
+```
+
+## Boxplot та Q-Q графіки
+
+```{r}
+par(mfrow = c(1, 2))
+boxplot(x1, main = "Boxplot n=100", col = "lightgray")
+qqnorm(x1); qqline(x1, col = "red")
+
+par(mfrow = c(1, 2))
+boxplot(x2, main = "Boxplot n=1000", col = "lightgray")
+qqnorm(x2); qqline(x2, col = "blue")
+```
+
+## Висновки
+
+Чим більший обсяг вибірки, тим ближчі емпіричні характеристики до теоретичних значень.
+
